@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader
 from django.core.urlresolvers import reverse
 from django.views import generic
-
+from django.template import Context
 from .models import Question, Choice
 
 
@@ -41,6 +41,9 @@ from .models import Question, Choice
 # 	#return HttpResponse( response % question_id)
 # 	question = get_object_or_404(Question,pk=question_id)
 # 	return render(request, 'polls/results.html',{'question':question})
+
+def about(request):	
+	return render(request, 'polls/about.html', {} )
 
 #try class-based generic view
 class IndexView(generic.ListView):

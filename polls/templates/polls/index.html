@@ -1,5 +1,6 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+{% extends 'polls/base.html' %}
+
+{% block content %}
 {% if latest_question_list %}
 
 	<ul>
@@ -9,6 +10,39 @@
 	{%  endfor  %}
 	</ul>
 
+	<div class="row">
+		{% for question in latest_question_list %}
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>{{ question.question_text }}</h3>
+                        <p><ul>
+                        {% for choice in question.choice_set.all %}							
+							<li>{{ choice.choice_text }}</li>							
+                        {% endfor %}
+                        </ul></p>
+                        <p>
+                            <a href={% url 'polls:detail' question.id %} class="btn btn-primary">Vote Now!</a> <a href={% url 'polls:results' question.id %} class="btn btn-default">See Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>		
+		{%  endfor  %}
+	</div>
+
 {%  else  %}
 	<p>No polls are available.</p>
 {% endif %}
+
+
+{% endblock %}
+
+
+
+{% block jumbotron %}
+<div class="jumbotron" >
+	<h1>Hello, How's is Doing?</h1>
+	<p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+</div>
+{%  endblock %}
