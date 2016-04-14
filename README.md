@@ -1,5 +1,5 @@
 # Simple Poll Application
-Built upon Heroku Django Starter Template
+This is a practice application built upon Heroku Django Starter Template
 
 ## Features
 - Vote for questions and view results.
