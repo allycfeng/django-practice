@@ -54,6 +54,8 @@ EMAIL_HOST_PASSWORD = '8Justice'
 EMAIL_PORT = 587
 EMAIL_USER_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
+
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/polls/'
 
