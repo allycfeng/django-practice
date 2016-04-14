@@ -41,5 +41,5 @@ class UserSubmittedQuestionForm(forms.ModelForm):
 
 	class Meta:
 		model = Question
-		fields='__all__'
+		fields=['question_text']
         #exclude = ('pub_date', )

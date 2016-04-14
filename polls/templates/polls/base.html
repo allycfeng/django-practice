@@ -1,7 +1,5 @@
 {% load staticfiles %}
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,28 +36,17 @@
       <![endif]-->
 
       {% block style %}
-
       {%  endblock %}
 
     </head>
-
     <body role="document">
-
       {% include 'polls/navbar.html' %}
-
       <div class="container theme-showcase" role="main">
-        {{request.path}}
         {% block jumbotron %}
-
         {%  endblock %}
 
         {% block content %}
-
-
         {%  endblock %}
-
-
-
       </div> <!-- /container -->
 
 

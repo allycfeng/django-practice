@@ -11,25 +11,22 @@
           <a class="navbar-brand" href="{% url 'polls:index' %}">Let's Vote !</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-
-            {% url "polls:about" as about %}
-
+            {% url "polls:index" as index %}
+            {% url "polls:mypoll" as about %}
+            {% url "polls:create" as create %}
           <ul class="nav navbar-nav">
-            <li {% if request.path == about %} class="active" {% endif %}><a href="{% url 'polls:about' %}">About</a></li>
+            <li {% if request.path == index %} class="active" {% endif %}><a href="{% url 'polls:index' %}">All Polls</a></li>
+            <li {% if request.path == about %} class="active" {% endif %}><a href="{% url 'polls:mypoll' %}">My Polls</a></li>
             <li {% if request.path == create %} class="active" {% endif %}><a href="{% url 'polls:create' %}">Create Polls</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
               {% if not request.user.is_authenticated %}
-                <li><a href="{% url 'polls:about' %}">Login</a></li>
-                <li><a href="{% url 'polls:about' %}">Sign Up</a></li>
+                <li><a href="{% url 'account_login' %}">Login</a></li>
+                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
                 {%  else %}
-                <li><a href="{% url 'polls:about' %}">Logout</a></li>
+                <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% endif %}
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
           </ul>

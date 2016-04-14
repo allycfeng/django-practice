@@ -1,18 +1,16 @@
 {% extends 'polls/base.html' %}
 
-
 {% block content %}
 
-<h1>{{ question.question_text }}</h1>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<!--
-<ul>
-{% for choice in question.choice_set.all %}
-	<li>{{ choice.choice_text }}</li>
+<h1>{{ question.question_text }}</h1><br/>
+<p><strong>
+	{% if error_message %}
+	{{ error_message }}
+	{% else %}
+	Please vote for one option
+	{% endif %}
+</strong></p>
 
-{% endfor %}
-</ul>
--->
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
@@ -20,7 +18,8 @@
 	<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" >
 	<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
 {% endfor %}
-<input type="submit" value="Vote" />
+<br/>
+<input type="submit" value="Vote" class='btn btn-default'/>
 </form>
 
 {% endblock %}
