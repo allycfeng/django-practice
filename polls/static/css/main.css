@@ -2,3 +2,8 @@ h1{
 	color:red;
 }
 
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
+}

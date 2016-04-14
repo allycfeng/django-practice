@@ -35,8 +35,27 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'polls',
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 )
+
+#required by django.contrib.sites
+SITE_ID = 1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'weichingfeng@gmail.com'
+EMAIL_HOST_PASSWORD = '8Justice'
+EMAIL_PORT = 587
+EMAIL_USER_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/polls/'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import Context
 from .models import Question, Choice
+from .forms import UserSubmittedQuestionForm, ChoiceFormSet
 
 
 # Create your views here.
@@ -43,7 +44,35 @@ from .models import Question, Choice
 # 	return render(request, 'polls/results.html',{'question':question})
 
 def about(request):	
+	print 'whatever'
 	return render(request, 'polls/about.html', {} )
+
+# why didn't it show error when required field is not set?
+def create(request):
+	if request.POST:
+		form = UserSubmittedQuestionForm(request.POST)
+		if form.is_valid():
+			question = form.save(commit=False)
+			choice_formset = ChoiceFormSet(request.POST, instance=question)			
+			if choice_formset.is_valid():
+				question.save()
+				choice_formset.save()
+				return HttpResponseRedirect(reverse('polls:index'))
+			else:
+				print "errors", choice_formset.errors
+				choice_formset.errormsg = "Please enter 2 choices"
+				
+		else:
+			choice_formset = ChoiceFormSet(instance=Choice())
+	else:
+		form = UserSubmittedQuestionForm()
+		choice_formset = ChoiceFormSet(instance=Choice())
+	print form
+	context = {
+		"form": form,
+		"choice_formset": choice_formset,
+	}
+	return render(request,'polls/create.html', context)
 
 #try class-based generic view
 class IndexView(generic.ListView):
@@ -51,7 +80,9 @@ class IndexView(generic.ListView):
 	context_object_name = 'latest_question_list'
 
 	def get_queryset(self):
-		return Question.objects.order_by('pub_date')[:5]
+		#return Question.objects.order_by('pub_date')[:10]
+		return Question.objects.order_by('pub_date')
+
 
 class DetailView(generic.DetailView):
 	model = Question
